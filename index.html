@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="src/styles/style.css" />
+    <script
+      src="https://kit.fontawesome.com/1e5d8d8a4b.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Miner's Foundry</title>
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+      <button class="closebtn" id="storeCloseButton">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button id="buyIronDrill" class="storeButton">
+        Iron Drill - 10 Iron
+      </button>
+      <button id="buyCoalDrill" class="storeButton">
+        Coal Drill - 10 Iron
+      </button>
+      <button id="buySteelFurnace" class="storeButton">
+        Furnace - 50 Iron
+      </button>
+    </div>
+
+    <main id="main">
+      <section class="resourceSection">
+        <div class="sectionTitleContainer">
+          <h2 class="sectionTitle">Iron Mine</h2>
+          <h3 id="ironCount" class="resourceCount">
+            <span id="totalIron">0</span> Iron
+          </h3>
+        </div>
+        <h3 class="toolTitle">
+          Drills<span
+            id="ironDrillTitleAmount"
+            class="resourceProducerCount"
+          ></span>
+        </h3>
+        <div id="ironDrills" class="drills"></div>
+      </section>
+
+      <section class="resourceSection" hidden="hidden" id="coalMine">
+        <div class="sectionTitleContainer">
+          <h2 class="sectionTitle">Coal Mine</h2>
+          <h3 id="coalCount" class="resourceCount">
+            <span id="totalCoal">0</span> Coal
+          </h3>
+        </div>
+        <h3 class="toolTitle">
+          Drills<span
+            id="coalDrillTitleAmount"
+            class="resourceProducerCount"
+          ></span>
+        </h3>
+        <div id="coalDrills" class="drills"></div>
+      </section>
+
+      <section class="resourceSection" hidden="hidden" id="foundry">
+        <div class="sectionTitleContainer">
+          <h2 class="sectionTitle">Foundry</h2>
+          <h3 id="steelCount" class="resourceCount">
+            <span id="totalSteel">0</span> Steel
+          </h3>
+        </div>
+        <h3 class="toolTitle">Furnaces</h3>
+        <div id="steelFurnaces" class="drills"></div>
+      </section>
+    </main>
+
+    <footer id="pageFooter">
+      <button id="storeOpenButton">Store</button>
+      <button id="reset">Reset</button>
+    </footer>
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+  </body>
+</html>

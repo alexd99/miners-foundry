@@ -1,0 +1,73 @@
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 45px;
+}
+
+#storeCloseButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--default-font), monospace;
+  background-color: transparent;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+}
+#storeCloseButton:hover {
+  color: var(--secondary-color);
+  background-color: #ffffff32;
+}
+#storeCloseButton:active {
+  color: var(--secondary-color);
+  background-color: #ffffff23;
+}
+.storeButton {
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 6px 18px;
+  width: 100%;
+  font-family: var(--default-font), monospace;
+  background-color: transparent;
+  border: none;
+  color: var(--primary-color);
+  font-size: 16px;
+}
+.storeButton:hover {
+  color: var(--secondary-color);
+  background-color: #ffffff32;
+}
+.storeButton:active {
+  color: var(--secondary-color);
+  background-color: #ffffff23;
+}
+#storeOpenButton {
+  box-shadow: inset 0px -3px 7px 0px #91b8b3;
+  background: #768d87 linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+  border-radius: 2px;
+  border: 1px solid #0b0e07;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-size: 15px;
+  padding: 6px 18px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #263666;
+}
+#storeOpenButton:hover {
+  background: #6c7c7c linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+}
+#storeOpenButton:active {
+  position: relative;
+  top: 1px;
+}
