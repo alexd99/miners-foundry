@@ -1,16 +1,15 @@
 import { generateDrillName } from "./utils.ts";
 import { ProcessingUnit } from "./interfaces.ts";
+import { updateTitleAmounts } from "./updateTitleAmounts.ts";
 import {
-  getTotalCoal,
-  getTotalIron,
-  setTotalCoal,
-  setTotalIron,
-} from "./resources.ts";
-import { localStorageKeys } from "./localStorageKeys.ts";
+  ls_coalDrills,
+  ls_ironDrills,
+  ls_totalCoal,
+  ls_totalIron,
+} from "./localStorageData.ts";
 
 export type drillType = "iron" | "coal";
 
-// drill speed is 20ms
 const drillSpeed = 200;
 
 export const createDrill = (type: drillType, drillName?: string) => {
@@ -49,28 +48,21 @@ export const createDrill = (type: drillType, drillName?: string) => {
     switch (type) {
       case "iron": {
         const newDrill: ProcessingUnit = { name: drillNameToUse };
-        const savedDrills: ProcessingUnit[] = JSON.parse(
-          localStorage.getItem(localStorageKeys.ironDrills) ?? "[]",
-        );
-        localStorage.setItem(
-          localStorageKeys.ironDrills,
-          JSON.stringify([...savedDrills, newDrill]),
-        );
+        const { addUnit } = ls_ironDrills();
+        addUnit(newDrill);
         break;
       }
       case "coal": {
         const newDrill: ProcessingUnit = { name: drillNameToUse };
-        const savedDrills: ProcessingUnit[] = JSON.parse(
-          localStorage.getItem(localStorageKeys.coalDrills) ?? "[]",
-        );
-        localStorage.setItem(
-          localStorageKeys.coalDrills,
-          JSON.stringify([...savedDrills, newDrill]),
-        );
+        const { addUnit } = ls_coalDrills();
+        addUnit(newDrill);
         break;
       }
     }
   }
+
+  updateTitleAmounts("ironDrills");
+  updateTitleAmounts("coalDrills");
 
   let value = 0;
   setInterval(function () {
@@ -80,11 +72,11 @@ export const createDrill = (type: drillType, drillName?: string) => {
     if (drill.value >= drill.max) {
       switch (type) {
         case "iron":
-          const totalIron = getTotalIron();
+          const { amount: totalIron, setAmount: setTotalIron } = ls_totalIron();
           setTotalIron(totalIron + 1);
           break;
         case "coal":
-          const totalCoal = getTotalCoal();
+          const { amount: totalCoal, setAmount: setTotalCoal } = ls_totalCoal();
           setTotalCoal(totalCoal + 1);
       }
 

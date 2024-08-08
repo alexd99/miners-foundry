@@ -1,14 +1,12 @@
 import { generateFurnaceName } from "./utils.ts";
-import {
-  getTotalCoal,
-  getTotalIron,
-  getTotalSteel,
-  setTotalCoal,
-  setTotalIron,
-  setTotalSteel,
-} from "./resources.ts";
 import { ProcessingUnit } from "./interfaces.ts";
-import { localStorageKeys } from "./localStorageKeys.ts";
+import {
+  ls_steelFurnaces,
+  ls_totalCoal,
+  ls_totalIron,
+  ls_totalSteel,
+} from "./localStorageData.ts";
+import { updateTitleAmounts } from "./updateTitleAmounts.ts";
 
 // furnace speed is 50ms
 const furnaceSpeed = 800;
@@ -36,20 +34,17 @@ export const createFurnace = (furnaceName?: string) => {
   }
 
   if (!furnaceName) {
+    const { addUnit } = ls_steelFurnaces();
     const newFurnace: ProcessingUnit = { name: furnaceNameToUse };
-    const savedFurnaces: ProcessingUnit[] = JSON.parse(
-      localStorage.getItem(localStorageKeys.steelFurnaces) ?? "[]",
-    );
-    localStorage.setItem(
-      localStorageKeys.steelFurnaces,
-      JSON.stringify([...savedFurnaces, newFurnace]),
-    );
+    addUnit(newFurnace);
   }
+
+  updateTitleAmounts("steelFurnaces");
 
   let isFurnaceBusy = false;
   setInterval(() => {
-    const totalIron = getTotalIron();
-    const totalCoal = getTotalCoal();
+    const { amount: totalIron, setAmount: setTotalIron } = ls_totalIron();
+    const { amount: totalCoal, setAmount: setTotalCoal } = ls_totalCoal();
 
     // the ratio of steel is 2 iron:1 coal
     if (totalIron >= 2 && totalCoal >= 1 && !isFurnaceBusy) {
@@ -63,7 +58,8 @@ export const createFurnace = (furnaceName?: string) => {
         value++;
 
         if (furnace.value >= furnace.max) {
-          const totalSteel = getTotalSteel();
+          const { amount: totalSteel, setAmount: setTotalSteel } =
+            ls_totalSteel();
           setTotalSteel(totalSteel + 1);
           isFurnaceBusy = false;
           value = 0;

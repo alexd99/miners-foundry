@@ -1,9 +1,9 @@
 import "../styles/styles.css";
 import { createDrill } from "./drill.ts";
-import { getTotalIron, setTotalIron } from "./resources.ts";
 import { createFurnace } from "./furnace.ts";
 import { initializeResourceProducerSet } from "./initializeResourceProducerSet.ts";
 import { initializeResourceCount } from "./initializeResourceCount.ts";
+import { ls_totalIron } from "./localStorageData.ts";
 
 function openNav() {
   const sideNav = document.getElementById("mySidenav");
@@ -59,10 +59,10 @@ window.addEventListener("load", function () {
   const ironDrillButton = document.getElementById("buyIronDrill");
   if (ironDrillButton) {
     ironDrillButton.onclick = () => {
-      const ironToral = getTotalIron();
-      if (ironToral >= 10) {
+      const { amount: ironTotal, setAmount: setTotalIron } = ls_totalIron();
+      if (ironTotal >= 10) {
         createDrill("iron");
-        setTotalIron(ironToral - 10);
+        setTotalIron(ironTotal - 10);
       }
     };
   }
@@ -70,10 +70,10 @@ window.addEventListener("load", function () {
   const coalDrillButton = document.getElementById("buyCoalDrill");
   if (coalDrillButton) {
     coalDrillButton.onclick = () => {
-      const ironToral = getTotalIron();
-      if (ironToral >= 10) {
+      const { amount: ironTotal, setAmount: setTotalIron } = ls_totalIron();
+      if (ironTotal >= 10) {
         createDrill("coal");
-        setTotalIron(ironToral - 10);
+        setTotalIron(ironTotal - 10);
         const coalMine = document.getElementById("coalMine");
         if (coalMine) {
           coalMine.removeAttribute("hidden");
@@ -85,10 +85,10 @@ window.addEventListener("load", function () {
   const steelFurnaceButton = document.getElementById("buySteelFurnace");
   if (steelFurnaceButton) {
     steelFurnaceButton.onclick = () => {
-      const ironToral = getTotalIron();
-      if (ironToral >= 50) {
+      const { amount: ironTotal, setAmount: setTotalIron } = ls_totalIron();
+      if (ironTotal >= 50) {
         createFurnace();
-        setTotalIron(ironToral - 50);
+        setTotalIron(ironTotal - 50);
         const foundry = document.getElementById("foundry");
         if (foundry) {
           foundry.removeAttribute("hidden");
