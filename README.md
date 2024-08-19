@@ -16,7 +16,7 @@ After years of working extensively with React and other modern JavaScript framew
 
 1. **Start Mining:** You are provided with one iron mine for free at the start.
 2. **Purchase Drills:** Use your collected iron to purchase drills which will automate and increase your mining efficiency.
-3. **Smelt Plates:** Convert your mined iron an coal into plates with the purchase of a furnace.
+3. **Smelt Plates:** Convert your mined iron and coal into plates with the purchase of a furnace.
 4. **Upgrade Factory:** Use the plates to upgrade your factory, enhancing various aspects of production.
 
 ## Playing
