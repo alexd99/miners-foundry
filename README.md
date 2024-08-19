@@ -21,4 +21,4 @@ After years of working extensively with React and other modern JavaScript framew
 
 ## Playing
 
-The game can be found online at [alexd99.github.io/miners-foundry/](alexd99.github.io/miners-foundry/) all progress is saved automatically in local storage.
+The game can be found online at [alexd99.github.io/miners-foundry/](https://alexd99.github.io/miners-foundry/) all progress is saved automatically in local storage.
