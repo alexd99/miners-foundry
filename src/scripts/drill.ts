@@ -3,6 +3,7 @@ import { ProcessingUnit } from "./interfaces.ts";
 import { updateTitleAmounts } from "./updateTitleAmounts.ts";
 import {
   ls_coalDrills,
+  ls_drillSpeed,
   ls_ironDrills,
   ls_totalCoal,
   ls_totalIron,
@@ -10,9 +11,13 @@ import {
 
 export type drillType = "iron" | "coal";
 
-const drillSpeed = 200;
-
 export const createDrill = (type: drillType, drillName?: string) => {
+  let [drillSpeed, setDrillSpeed] = ls_drillSpeed();
+  if (!drillSpeed) {
+    setDrillSpeed(200);
+    drillSpeed = 200;
+  }
+
   let drillSection: HTMLElement | null = null;
   switch (type) {
     case "iron":
@@ -72,11 +77,11 @@ export const createDrill = (type: drillType, drillName?: string) => {
     if (drill.value >= drill.max) {
       switch (type) {
         case "iron":
-          const { amount: totalIron, setAmount: setTotalIron } = ls_totalIron();
+          const [totalIron, setTotalIron] = ls_totalIron();
           setTotalIron(totalIron + 1);
           break;
         case "coal":
-          const { amount: totalCoal, setAmount: setTotalCoal } = ls_totalCoal();
+          const [totalCoal, setTotalCoal] = ls_totalCoal();
           setTotalCoal(totalCoal + 1);
       }
 

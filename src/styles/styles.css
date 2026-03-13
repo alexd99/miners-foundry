@@ -3,9 +3,8 @@
 :root {
   --title-font: "Rubik Mono One";
   --default-font: "Space Mono";
-  --primary-color: #ececec;
-  --secondary-color: #ffffff;
-  --tertiary-color: #cbcbcb;
+  --primary-color: #d1d1d1;
+  --secondary-color: #cbcbcb;
 }
 
 body,
@@ -50,7 +49,7 @@ progress[value] {
   height: 12px;
 }
 progress[value]::-webkit-progress-bar {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   border-radius: 2px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
@@ -73,7 +72,7 @@ progress[value]::-webkit-progress-value {
   background-color: #36454f;
 }
 .steelFurnace[value]::-webkit-progress-value {
-  background-color: #9ca5b1;
+  background-color: #7d8589;
 }
 #main {
   transition: margin-left 0.5s;
@@ -81,7 +80,7 @@ progress[value]::-webkit-progress-value {
 }
 #reset {
   background-color: transparent;
-  color: var(--tertiary-color);
+  color: var(--secondary-color);
   border: none;
   cursor: pointer;
 }

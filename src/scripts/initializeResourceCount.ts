@@ -8,17 +8,17 @@ import {
 export const initializeResourceCount = (type: resources) => {
   switch (type) {
     case "iron": {
-      const { amount, setAmount } = ls_totalIron();
+      const [amount, setAmount] = ls_totalIron();
       setAmount(amount);
       break;
     }
     case "coal": {
-      const { amount, setAmount } = ls_totalCoal();
+      const [amount, setAmount] = ls_totalCoal();
       setAmount(amount);
       break;
     }
     case "steel": {
-      const { amount, setAmount } = ls_totalSteel();
+      const [amount, setAmount] = ls_totalSteel();
       setAmount(amount);
       break;
     }

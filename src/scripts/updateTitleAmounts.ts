@@ -1,5 +1,9 @@
 import { resourcesProducers } from "./interfaces";
-import { ls_coalDrills, ls_ironDrills } from "./localStorageData";
+import {
+  ls_coalDrills,
+  ls_ironDrills,
+  ls_steelFurnaces,
+} from "./localStorageData";
 
 export const updateTitleAmounts = (type: resourcesProducers) => {
   switch (type) {
@@ -27,7 +31,7 @@ export const updateTitleAmounts = (type: resourcesProducers) => {
       const steelFurnacesTitleAmount = document.getElementById(
         "steelFurnacesTitleAmount",
       );
-      const { totalUnits } = ls_coalDrills();
+      const { totalUnits } = ls_steelFurnaces();
       if (steelFurnacesTitleAmount) {
         steelFurnacesTitleAmount.innerText = `( ${totalUnits} )`;
       }

@@ -1,4 +1,5 @@
 import { ProcessingUnit } from "./interfaces";
+import { StoreItems } from "./types.ts";
 
 export const localStorageKeys = {
   totalIron: "totalIron",
@@ -7,6 +8,9 @@ export const localStorageKeys = {
   ironDrills: "ironDrills",
   coalDrills: "coalDrills",
   steelFurnaces: "steelFurnaces",
+  drillSpeed: "drillSpeed",
+  furnaceSpeed: "furnaceSpeed",
+  storePrices: "storePrices",
 };
 
 interface LS_ProcessingUnit {
@@ -15,10 +19,28 @@ interface LS_ProcessingUnit {
   addUnit: (unit: ProcessingUnit) => void;
 }
 
-interface LS_TotalAmounts {
-  amount: number;
-  setAmount: (newAmount: number) => void;
+type LS_TotalAmounts = [amount: number, setAmount: (newAmount: number) => void];
+
+interface LS_StorePrices extends Record<StoreItems, number> {
+  setPrice: (item: StoreItems, price: number) => void;
 }
+
+export const ls_storePrices = (): LS_StorePrices => {
+  const setPrice = (item: StoreItems, newPrice: number) => {
+    const data = localStorage.getItem(localStorageKeys.storePrices);
+    const parsedData = data ? JSON.parse(data) : {};
+
+    const newData = { ...parsedData, [item]: newPrice };
+    localStorage.setItem(localStorageKeys.storePrices, JSON.stringify(newData));
+  };
+
+  const data = localStorage.getItem(localStorageKeys.storePrices);
+  const parsedData = data ? JSON.parse(data) : {};
+  return {
+    ...parsedData,
+    setPrice,
+  };
+};
 
 export const ls_ironDrills = (): LS_ProcessingUnit => {
   const data = localStorage.getItem(localStorageKeys.ironDrills);
@@ -91,10 +113,7 @@ export const ls_totalIron = (): LS_TotalAmounts => {
     }
   };
 
-  return {
-    amount,
-    setAmount,
-  };
+  return [amount, setAmount];
 };
 
 export const ls_totalCoal = (): LS_TotalAmounts => {
@@ -111,10 +130,7 @@ export const ls_totalCoal = (): LS_TotalAmounts => {
     }
   };
 
-  return {
-    amount,
-    setAmount,
-  };
+  return [amount, setAmount];
 };
 
 export const ls_totalSteel = (): LS_TotalAmounts => {
@@ -131,8 +147,29 @@ export const ls_totalSteel = (): LS_TotalAmounts => {
     }
   };
 
-  return {
-    amount,
-    setAmount,
+  return [amount, setAmount];
+};
+
+export const ls_drillSpeed = (): LS_TotalAmounts => {
+  const data = localStorage.getItem(localStorageKeys.drillSpeed);
+  const amount = data ? parseInt(data, 10) : 0;
+
+  const setAmount = (newAmount: number) => {
+    const stringNumber = newAmount.toString();
+    localStorage.setItem(localStorageKeys.drillSpeed, stringNumber);
   };
+
+  return [amount, setAmount];
+};
+
+export const ls_furnaceSpeed = (): LS_TotalAmounts => {
+  const data = localStorage.getItem(localStorageKeys.furnaceSpeed);
+  const amount = data ? parseInt(data, 10) : 0;
+
+  const setAmount = (newAmount: number) => {
+    const stringNumber = newAmount.toString();
+    localStorage.setItem(localStorageKeys.furnaceSpeed, stringNumber);
+  };
+
+  return [amount, setAmount];
 };
